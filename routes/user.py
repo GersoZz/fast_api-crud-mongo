@@ -16,7 +16,6 @@ def find_all_user():
 def create_user(user: User):
   new_user = dict(user)
   new_user["password"] = sha256_crypt.encrypt(new_user["password"])
-  del new_user["id"]
 
   objectId = conn.local.user.insert_one(new_user).inserted_id
   user = conn.local.user.find_one({"_id": objectId})
